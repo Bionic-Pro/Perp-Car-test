@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Car Matching Agent</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Welcome and Phases -->
+        <section id="welcome" class="section active">
+            <div class="container">
+                <h1>Find Your Perfect Car</h1>
+                <p>Let our car matching agent guide you to your ideal vehicle.</p>
+                <button id="startButton">Start</button>
+            </div>
+        </section>
+
+        <section id="phase1" class="section">
+            <div class="container" id="phase1Container"></div>
+            <button id="phase1Next">Next</button>
+        </section>
+
+        <section id="phase2" class="section">
+            <div class="container" id="phase2Container"></div>
+            <button id="phase2Next">Next</button>
+        </section>
+
+        <section id="phase3" class="section">
+            <div class="container" id="phase3Container"></div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
