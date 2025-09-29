@@ -52,3 +52,24 @@ input, select {
     width: 100%;
     box-sizing: border-box;
 }
+
+.car-card {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 6px;
+    background: #f9f9f9;
+}
+
+.car-card h3 {
+    margin-top: 0;
+}
+
+.car-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.car-card ul li {
+    margin-bottom: 0.3em;
+}
