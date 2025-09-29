@@ -1,4 +1,3 @@
-// List of phase 1 questions and options
 const phase1Questions = [
     {
         id: 'age',
@@ -79,11 +78,50 @@ const phase1Questions = [
     }
 ];
 
-// Current state
+// Simple example car database 
+const carDatabase = [
+    {
+        make: "Toyota",
+        model: "Corolla",
+        fuel: "Full hybrid (self-charging)",
+        priceRange: "$20k-$30k (recent used or certified pre-owned)",
+        description: "Reliable, efficient full hybrid sedan."
+    },
+    {
+        make: "Honda",
+        model: "Civic",
+        fuel: "Petrol (standard)",
+        priceRange: "$20k-$30k (recent used or certified pre-owned)",
+        description: "Compact sedan with sporty feel."
+    },
+    {
+        make: "Tesla",
+        model: "Model 3",
+        fuel: "Full electric (BEV)",
+        priceRange: "$30k-$50k (new entry-level)",
+        description: "Cutting-edge electric vehicle."
+    },
+    {
+        make: "Ford",
+        model: "Escape",
+        fuel: "Mild hybrid",
+        priceRange: "$20k-$30k (recent used or certified pre-owned)",
+        description: "Versatile mild hybrid SUV."
+    },
+    {
+        make: "Volkswagen",
+        model: "Golf",
+        fuel: "Petrol (premium)",
+        priceRange: "$20k-$30k (recent used or certified pre-owned)",
+        description: "Fun-to-drive compact hatchback."
+    }
+];
+
+// State storage
 let answers = {};
 let currentPhase = 0;
 
-// Utility
+// Utility functions
 function createSelectInput(question) {
     const container = document.createElement('div');
     const label = document.createElement('label');
@@ -107,16 +145,20 @@ function createSelectInput(question) {
 
 function showPhase(phaseIndex) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
     if (phaseIndex === 0) {
         document.getElementById('welcome').classList.add('active');
     } else if (phaseIndex === 1) {
         document.getElementById('phase1').classList.add('active');
         buildPhase1();
+    } else if (phaseIndex === 2) {
+        document.getElementById('phase2').classList.add('active');
+        buildPhase2();
     }
-    // Note: Phase 2 and 3 can be similarly added if extended
+    currentPhase = phaseIndex;
 }
 
-// Build phase 1 UI
+// Build UI for phase 1 questions
 function buildPhase1() {
     const container = document.getElementById('phase1Container');
     container.innerHTML = '';
@@ -125,9 +167,49 @@ function buildPhase1() {
     });
 }
 
+// Build UI for phase 2 recommendation list based on answers
+function buildPhase2() {
+    const container = document.getElementById('phase2Container');
+    container.innerHTML = '';
+
+    // Example: Simple filter to show cars matching budget and fuel preference
+    const filteredCars = carDatabase.filter(car => 
+        car.priceRange === answers.budget &&
+        car.fuel === answers.fuel_type);
+
+    if (filteredCars.length === 0) {
+        container.textContent = 'No cars match your preferences exactly. Try adjusting your selections.';
+        return;
+    }
+
+    filteredCars.forEach(car => {
+        const card = document.createElement('div');
+        card.className = 'car-card';
+
+        const title = document.createElement('h3');
+        title.textContent = `${car.make} ${car.model}`;
+        card.appendChild(title);
+
+        const desc = document.createElement('p');
+        desc.textContent = car.description;
+        card.appendChild(desc);
+
+        container.appendChild(card);
+    });
+
+    // Add a restart button
+    const restartBtn = document.createElement('button');
+    restartBtn.textContent = 'Start Over';
+    restartBtn.addEventListener('click', () => {
+        answers = {};
+        showPhase(1);
+    });
+    container.appendChild(restartBtn);
+}
+
+// Event Listeners
 document.getElementById('startButton').addEventListener('click', () => {
-    currentPhase = 1;
-    showPhase(currentPhase);
+    showPhase(1);
 });
 
 document.getElementById('phase1Next').addEventListener('click', () => {
@@ -135,9 +217,8 @@ document.getElementById('phase1Next').addEventListener('click', () => {
     phase1Questions.forEach(q => {
         answers[q.id] = container.querySelector(`#${q.id}`).value;
     });
-    alert('Answers recorded: ' + JSON.stringify(answers, null, 2));
-    // Advance or proceed to phase 2 as needed
+    showPhase(2);
 });
 
-// Initial display
+// Initialize app
 showPhase(0);
