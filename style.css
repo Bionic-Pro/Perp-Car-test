@@ -1,0 +1,54 @@
+/* Basic reset and typography */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f8;
+    color: #333;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.container {
+    margin-bottom: 1em;
+}
+
+h1 {
+    margin-bottom: 0.4em;
+}
+
+button {
+    background-color: #337ab7;
+    color: white;
+    border: none;
+    padding: 0.8em 2em;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #286090;
+}
+
+input, select {
+    font-size: 1rem;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    width: 100%;
+    box-sizing: border-box;
+}
